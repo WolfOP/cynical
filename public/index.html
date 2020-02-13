@@ -2,221 +2,102 @@
 <html>
 
 <head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-154589583-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  gtag('config', 'UA-154589583-1');
-</script>
-	<script src="app.js"></script>
-	<script src="newRelic.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title>Collapsible sidebar using Bootstrap 4</title>
 
-	<title>Cynical Unblocker</title>
-	<style>
-    body {
-      padding: 25px;
-      background-color: white;
-      color: black;
-      font-size: 25px;
-    }
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style2.css">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-    .dark-mode {
-      background-color: #092c3e;
-      color: white;
-    }
-</style>
-			
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-	<script>
-var url = require('url');
-var querystring = require('querystring');
-var express = require('express');
-var unblocker = require('unblocker');
-var Transform = require('stream').Transform;
 
-var app = express();
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Menu</h3>
+            </div>
 
-var google_analytics_id = process.env.GA_ID || null;
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="unblocker.html">Unblocker</a>
+                </li>
+                <li>
+                    <li>
+                    <a href="">Gameboy</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="#">Testing</a>
+                </li>
+            </ul>
 
-function addGa(html) {
-    if (google_analytics_id) {
-        var ga = [
-            "<script type=\"text/javascript\">",
-            "var _gaq = []; // overwrite the existing one, if any",
-            "_gaq.push(['_setAccount', '" + google_analytics_id + "']);",
-            "_gaq.push(['_trackPageview']);",
-            "(function() {",
-            "  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;",
-            "  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';",
-            "  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);",
-            "})();",
-            ].join("\n");
-        html = html.replace("</body>", ga + "\n\n</body>");
-    }
-    return html;
-}
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://www.youtube.com/channel/UCnCO0U2CPRU313r5N8qxjKg" class="download">Youtube</a>
+                </li>
+                
+            </ul>
+        </nav>
 
-function googleAnalyticsMiddleware(data) {
-    if (data.contentType == 'text/html') {
+        <!-- Page Content  -->
+        <div id="content">
 
-        // https://nodejs.org/api/stream.html#stream_transform
-        data.stream = data.stream.pipe(new Transform({
-            decodeStrings: false,
-            transform: function(chunk, encoding, next) {
-                this.push(addGa(chunk.toString()));
-                next();
-            }
-        }));
-    }
-}
+           
 
-var unblockerConfig = {
-    prefix: '/proxy/',
-    responseMiddleware: [
-        googleAnalyticsMiddleware
-    ]
-};
+                    <button type="button" id="sidebarCollapse" class="btn btn-info float-right">
 
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    
+                     
 
+                    
+               
 
-// this line must appear before any express.static calls (or anything else that sends responses)
-app.use(unblocker(unblockerConfig));
+            
+    </div>
 
-// serve up static files *after* the proxy is run
-app.use('/', express.static(__dirname + '/public'));
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-// this is for users who's form actually submitted due to JS being disabled or whatever
-app.get("/no-js", function(req, res) {
-    // grab the "url" parameter from the querystring
-    var site = querystring.parse(url.parse(req.url).query).url;
-    // and redirect the user to /proxy/url
-    res.redirect(unblockerConfig.prefix + site);
-});
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#sidebar").mCustomScrollbar({
+                theme: "minimal"
+            });
 
-// for compatibility with gatlin and other servers, export the app rather than passing it directly to http.createServer
-module.exports = app;
-</script>
-		
-
-			<h1>Cynical</h1>
-
-			<br>
-
-			<form action="no-js" method="get" id="unblocker-form">
-				<p>
-					URL:
-					<input type="text" id="url" name="url" autofocus="autofocus" placeholder="URL I guess" required> <br>
-		
-				<p>Subscribe or else ill scream at my lizard and blame it on you</p><br>
-		
-      
-          <input class="btn btn-success" type="submit">
-        </p>
-
-      </form>
-      
-      
-	
-	<p>Hello, Pittoo here,</p>
-	<p>If you somehow found your way here, please DO NOT share this website.</p>
-<p>We made this website private for a reason. We don't want this website to be used in a bad way.</p>
-	<p>Thanks</p>
-	<script src="https://apis.google.com/js/platform.js"></script>
-
-<div class="g-ytsubscribe" data-channelid="UCnCO0U2CPRU313r5N8qxjKg" data-layout="full" data-count="default"></div>
-	<script src="https://apis.google.com/js/platform.js"></script>
-
-<div class="g-ytsubscribe" data-channelid="UCY8aXiRFn0V6DYuX-qSRMsA" data-layout="full" data-count="default"></div>
-
-<script src="https://apis.google.com/js/platform.js"></script>
-
-<div class="g-ytsubscribe" data-channelid="UCvVL0hHRfFoder1Yd3qyQKw" data-layout="full" data-count="default"></div>
-
-<br><br>
-
-
-	<p>Email: ceejcake@gmail.com</p>
-	<p>Discord: Pittoo#1575</p>
-
-
-<br><br><button class="btn btn-info" onclick="myFunction()">Toggle dark mode (Test, sorta useless)</button>
-
-
-     
-		
-<script>
-function myFunction() {
-   var element = document.body;
-   element.classList.toggle("dark-mode");
-}
-</script>
-
-
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/7.7.0/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/7.7.0/firebase-analytics.js"></script>
-
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-	
-
-        
-  
-    
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('active');
+                $('.collapse.in').toggleClass('in');
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            });
+        });
+    </script>
 </body>
 
-	<script>
-		function $(id){
-			return document.getElementById(id);
-		}
-		
-		$('unblocker-form').onsubmit = function(){
-			var url = $('url').value;
-			if(url.substr(0,4) === "pornhub.com"){
-				url = "frjjfrjrfjrfj" + url;}
-			if(url.substr(0,4) === "piratecove.com"){
-				url = "frjjfrjrfjrfj" + url;}
-			if(url.substr(0,4) === "sex.com"){
-				url = "frjjfrjrfjrfj" + url;}
-			if(url.substr(0,4) != "http"){
-				url = "http://" + url;}
-			if(url === "http://pornhub.com"){
-				url = "http://wtf69420.herokuapp.com";}
-			if(url === "http://piratecove.com"){
-				url = "http://wtf69420.herokuapp.com";}
-			if(url === "http://sex.com"){
-				url = "http://wtf69420.herokuapp.com";}
-			window.location.pathname = 'proxy/' + url;
-			return false;
-		};
-		
-		function checkError(){
-			var search = window.location.search;
-			var start = search.indexOf('error=');
-			if(start > -1){
-				var stop = search.indexOf('&', start);
-				if(stop == -1){ stop = undefined; }
-				// +6 for "error="
-				var err = search.substr(start+6, stop);
-                var $error = $('error');
-				$error.innerText = $error.textContent = decodeURIComponent(err);
-				$error.style.display = "block";
-			}
-		}
-    
-		window.onload = function() { 
-			$('url').focus(); 
-			checkError(); 
-		}
-	</script>
+</html>
