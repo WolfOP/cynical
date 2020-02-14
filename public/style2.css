@@ -73,7 +73,7 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #0c3c54;
+    background: #0c3d57;
 }
 
 #sidebar ul.components {
@@ -100,7 +100,7 @@ a:focus {
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: 092c3e;
+    background: #6d7fcc;
 }
 
 a[data-toggle="collapse"] {
@@ -134,8 +134,8 @@ ul.CTAs a {
 }
 
 a.download {
-    background: #ff2b2b;
-    color: #Fff;
+    background: #f03030;
+    color: #FFF;
 }
 
 a.article,
@@ -181,5 +181,8 @@ a.article:hover {
     }
     #sidebarCollapse span {
         display: none;
+        
     }
 }
+
+
